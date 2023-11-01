@@ -135,6 +135,7 @@ class BaseTestSystem(System):
     """
     _CPUModel = BaseCPU
     _MemoryModel = AbstractMemory
+    _BranchPred = None
     _Clk         = "1GHz"
     _L1DCacheSize = "32kB"
     _L2CacheSize = "1MB"
@@ -156,6 +157,10 @@ class BaseTestSystem(System):
 
 
             self.cpu = self._CPUModel()
+
+            if self._BranchPred != None:
+                self.cpu.branchPred = self._BranchPred()
+            
             self.cpu.l1d = L1DCache(self._L1DCacheSize)
             self.cpu.l1i = L1ICache()
             self.l1_to_l2 = L2XBar(width=64)

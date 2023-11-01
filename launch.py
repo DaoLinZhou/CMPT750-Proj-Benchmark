@@ -20,10 +20,11 @@ if __name__ == "__main__":
                       help = """Number of cores used for simulation""")
     args  = parser.parse_args()
 
-    cpu_types = ['Simple', 'O3_W256']
+    # cpu_types = ['Simple','DefaultO3','Minor4', 'O3_W256', 'O3_W2K']
+    cpu_types = ['DefaultO3']
+    # mem_types = ['SingleCycle', 'Inf', 'Slow']
     mem_types = ['Slow']
-    L1_cache = ['4kB','8kB','32kB','64kB']
-    L2_cache = ['128kB','256kB','512kB','1MB']
+    branch_predictors = ['LTAGE', 'PerceptronBP']
 
     bm_list = []
 
@@ -38,15 +39,14 @@ if __name__ == "__main__":
     for bm in bm_list:
         for cpu in cpu_types:
             for mem in mem_types:
-                for l1 in L1_cache:
-                    for l2 in L2_cache:
-                        run = gem5Run.createSERun(
-                            'microbench_tests',
-                            os.getenv('M5_PATH')+'/build/X86/gem5.opt',
-                            'gem5-config/run_micro_q2.py',
-                            'results/X86/run_micro/q2/{}/{}/{}/{}/{}'.format(bm,cpu,mem,l1,l2),
-                            cpu,mem, l1, l2, os.path.join('microbenchmark',bm,'bench.X86'))
-                        jobs.append(run)
+                for bp in branch_predictors:
+                    run = gem5Run.createSERun(
+                        'microbench_tests',
+                        os.getenv('M5_PATH')+'/build/X86/gem5.opt',
+                        'gem5-config/run_micro.py',
+                        'results/X86/run_micro/{}/{}/{}/{}'.format(bm,cpu,mem,bp),
+                        cpu,mem,bp, os.path.join('microbenchmark',bm,'bench.X86'))
+                    jobs.append(run)
 
     with mp.Pool(args.N) as pool:
         pool.map(worker,jobs)

@@ -5,14 +5,12 @@ from __future__ import print_function
 import argparse
 import m5
 from m5.objects import TimingSimpleCPU, DerivO3CPU, MinorCPU
-from m5.objects import LTAGE, SimpleMemory
+from m5.objects import LTAGE, SimpleMemory, PerceptronBP
 from m5.objects import Root
 from m5.objects import *
 import time
 from system import BaseTestSystem
 from system import InfMemory, SingleCycleMemory, SlowMemory
-
-BranchPredictor = LTAGE
 
 class IntALU(FUDesc):
     opList = [ OpDesc(opClass='IntAlu',opLat=1) ]
@@ -154,7 +152,6 @@ class Minor4_FUPool(MinorFUPool):
         MinorMemFU(), MinorMiscFU()]
 
 class Minor4CPU(MinorCPU):
-    branchPred = BranchPredictor()
     executeFuncUnits = Minor4_FUPool()
     decodeInputWidth  = 4
     executeInputWidth = 4
@@ -163,7 +160,6 @@ class Minor4CPU(MinorCPU):
 
 
 class O3_W256CPU(DerivO3CPU):
-    branchPred = BranchPredictor()
     fuPool = Ideal_FUPool()
     fetchWidth = 32
     decodeWidth = 32
@@ -183,7 +179,6 @@ class O3_W256CPU(DerivO3CPU):
 
 
 class O3_W2KCPU(DerivO3CPU):
-    branchPred = BranchPredictor()
     fuPool = Ideal_FUPool()
     fetchWidth = 32
     decodeWidth = 32
@@ -202,10 +197,10 @@ class O3_W2KCPU(DerivO3CPU):
     numROBEntries = 2096
 
 class SimpleCPU(TimingSimpleCPU):
-    branchPred = BranchPredictor()
+    pass
 
 class DefaultO3CPU(DerivO3CPU):
-    branchPred = BranchPredictor()
+    pass
 
 # Add more CPUs under test before this
 valid_cpus = [SimpleCPU, Minor4CPU, DefaultO3CPU, O3_W256CPU, O3_W2KCPU]
@@ -215,11 +210,13 @@ valid_cpus = {cls.__name__[:-3]:cls for cls in valid_cpus}
 valid_memories = [InfMemory, SingleCycleMemory, SlowMemory]
 valid_memories = {cls.__name__[:-6]:cls for cls in valid_memories}
 
+valid_bps = [LTAGE, PerceptronBP]
+valid_bps = {cls.__name__:cls for cls in valid_bps}
+
 parser = argparse.ArgumentParser()
 parser.add_argument('cpu', choices = valid_cpus.keys())
 parser.add_argument('memory_model', choices = valid_memories.keys())
-parser.add_argument('l1d_size',type = str,  help = "CachesizeofL1d")
-parser.add_argument('l2_size', type = str,  help = "CachesizeofL2")
+parser.add_argument('branch_predictor', choices = valid_bps.keys())
 parser.add_argument('binary', type = str, help = "Path to binary to run")
 parser.add_argument("--clock", action="store",
                       default='1GHz',
@@ -228,11 +225,11 @@ parser.add_argument("--clock", action="store",
 args  = parser.parse_args()
 
 class MySystem(BaseTestSystem):
-    _CPUModel = valid_cpus[args.cpu]
+    _CPUModel    = valid_cpus[args.cpu]
     _MemoryModel = valid_memories[args.memory_model]
-    _L1DCacheSize = args.l1d_size
-    _L2CacheSize = args.l2_size
     _Clk         = args.clock
+    _BranchPred   = valid_bps[args.branch_predictor]
+
 
 print (args.clock)
 system = MySystem()
