@@ -225,11 +225,11 @@ class BaseTestSystem(System):
                 self.cpu.interrupts[0].int_master = self.interrupt_xbar.slave
                 self.cpu.interrupts[0].int_slave = self.interrupt_xbar.master
 
-    def setTestBinary(self, binary_path):
+    def setTestBinary(self, binary_path, options):
         """Set up the SE process to execute the binary at binary_path"""
         from m5 import options
         self.cpu.workload = Process(
-                                    cmd = [binary_path])
+                                    cmd = [binary_path, options])
         self.cpu.createThreads()
 
 

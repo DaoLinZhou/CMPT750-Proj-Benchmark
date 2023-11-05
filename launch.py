@@ -1,5 +1,6 @@
 from run import gem5Run
 import os
+import re
 import sys
 from uuid import UUID
 from itertools import starmap
@@ -24,16 +25,20 @@ if __name__ == "__main__":
     cpu_types = ['DefaultO3']
     # mem_types = ['SingleCycle', 'Inf', 'Slow']
     mem_types = ['Slow']
-    branch_predictors = ['LTAGE', 'PerceptronBP']
+    branch_predictors = ['LTAGE', 'AlwaysTakenBP', 'PerceptronBP']
 
     bm_list = []
+    benchPattern = re.compile(r'^619')
 
     # iterate through files in microbench dir to
     # create a list of all microbenchmarks
 
-    for filename in os.listdir('microbenchmark'):
-        if os.path.isdir(f'microbenchmark/{filename}') and filename != '.git':
+    dir_path = '/data/home/rwa116/Project/spec/benchspec/CPU'
+    for filename in os.listdir(dir_path):
+        full_path = os.path.join(dir_path, filename)
+        if os.path.isdir(full_path) and benchPattern.match(filename):
             bm_list.append(filename)
+    print(bm_list)
 
     jobs = []
     for bm in bm_list:
@@ -45,7 +50,8 @@ if __name__ == "__main__":
                         os.getenv('M5_PATH')+'/build/X86/gem5.opt',
                         'gem5-config/run_micro.py',
                         'results/X86/run_micro/{}/{}/{}/{}'.format(bm,cpu,mem,bp),
-                        cpu,mem,bp, os.path.join('microbenchmark',bm,'bench.X86'))
+                        cpu,mem,bp, os.path.join('/data/home/rwa116/Project/spec/benchspec/CPU',bm,'build/build_base_mytest-m64.0000',bm.split(".")[1]),
+                        '')
                     jobs.append(run)
 
     with mp.Pool(args.N) as pool:
