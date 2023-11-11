@@ -234,7 +234,7 @@ class MySystem(BaseTestSystem):
 
 print (args.clock)
 system = MySystem()
-system.setTestBinary(args.binary, args.options)
+system.setTestBinary(args.binary, args.options.split())
 root = Root(full_system = False, system = system)
 m5.instantiate()
 
