@@ -5,7 +5,7 @@ from __future__ import print_function
 import argparse
 import m5
 from m5.objects import TimingSimpleCPU, DerivO3CPU, MinorCPU
-from m5.objects import LTAGE, SimpleMemory, PerceptronBP
+from m5.objects import LTAGE, SimpleMemory, AlwaysTakenBP, PerceptronBP
 from m5.objects import Root
 from m5.objects import *
 import time
@@ -210,7 +210,7 @@ valid_cpus = {cls.__name__[:-3]:cls for cls in valid_cpus}
 valid_memories = [InfMemory, SingleCycleMemory, SlowMemory]
 valid_memories = {cls.__name__[:-6]:cls for cls in valid_memories}
 
-valid_bps = [LTAGE, PerceptronBP]
+valid_bps = [LTAGE, AlwaysTakenBP, PerceptronBP]
 valid_bps = {cls.__name__:cls for cls in valid_bps}
 
 parser = argparse.ArgumentParser()
@@ -218,6 +218,7 @@ parser.add_argument('cpu', choices = valid_cpus.keys())
 parser.add_argument('memory_model', choices = valid_memories.keys())
 parser.add_argument('branch_predictor', choices = valid_bps.keys())
 parser.add_argument('binary', type = str, help = "Path to binary to run")
+parser.add_argument('options', type = str, help = "CMD options")
 parser.add_argument("--clock", action="store",
                       default='1GHz',
                       help = """Top-level clock for blocks running at system
@@ -233,7 +234,7 @@ class MySystem(BaseTestSystem):
 
 print (args.clock)
 system = MySystem()
-system.setTestBinary(args.binary)
+system.setTestBinary(args.binary, args.options.split())
 root = Root(full_system = False, system = system)
 m5.instantiate()
 
