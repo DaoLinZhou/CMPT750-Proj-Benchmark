@@ -20,6 +20,11 @@ def worker(bm, cpu, bp, bm_options):
         os.getenv('PROJ_PATH')+'/configs/example/se.py',
         os.getenv('BENCH_PATH')+'/results/X86/spec2017/{}/{}/{}'.format(bm,cpu,bp),
         '--cpu-type={cpu}'.format(cpu=cpu),
+        '--caches',
+        '--l2cache',
+        '--l1d_size=32kB',
+        '--l1i_size=32kB',
+        '--l2_size=512kB',
         '--bp-type={bp}'.format(bp=bp),
         '--cmd={cmd}'.format(cmd=os.path.join(os.getenv('SPEC_PATH'),bm,'build/build_base_mytest-m64.0000',bm.split(".")[1])),
         '--options={options}'.format(options=bm_options[bm]),
@@ -40,7 +45,7 @@ if __name__ == "__main__":
                       help = """Number of cores used for simulation""")
     args  = parser.parse_args()
 
-    cpu_types = ['TimingSimpleCPU']
+    cpu_types = ['DerivO3CPU']
     branch_predictors = ['LTAGE', 'PerceptronBP']
 
     # All benchmarks must have full name hardcoded here
