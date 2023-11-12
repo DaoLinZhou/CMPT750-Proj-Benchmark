@@ -46,7 +46,7 @@ if __name__ == "__main__":
     args  = parser.parse_args()
 
     cpu_types = ['DerivO3CPU']
-    branch_predictors = ['LTAGE', 'PerceptronBP']
+    branch_predictors = ['BiModeBP', 'PerceptronBP']
 
     # All benchmarks must have full name hardcoded here
     # Executable file in build_base directory must be renamed in some cases to match the benchmark name (ex. gcc_s)
