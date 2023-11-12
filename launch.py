@@ -18,14 +18,15 @@ def worker(bm, cpu, bp, bm_options):
         'microbench_tests',
         os.getenv('PROJ_PATH')+'/build/X86/gem5.opt',
         os.getenv('PROJ_PATH')+'/configs/example/se.py',
-        os.getenv('BENCH_PATH')+'/results/X86/spec2017/{}/{}/{}'.format(bm,cpu,bp),
+        os.getenv('BENCH_PATH')+'/results/X86/spec2017/{}/{}/{}'.format(bm,cpu,bp.name),
         '--cpu-type={cpu}'.format(cpu=cpu),
         '--caches',
         '--l2cache',
         '--l1d_size=32kB',
         '--l1i_size=32kB',
         '--l2_size=512kB',
-        '--bp-type={bp}'.format(bp=bp),
+        '--bp-type={bp}'.format(bp=bp.bp_model),
+        *bp.params,
         '--cmd={cmd}'.format(cmd=os.path.join(os.getenv('SPEC_PATH'),bm,'build/build_base_mytest-m64.0000',bm.split(".")[1])),
         '--options={options}'.format(options=bm_options[bm]),
         '--sys-clock=4GHz',
@@ -37,6 +38,13 @@ def worker(bm, cpu, bp, bm_options):
     json = run.dumpsJson()
     print(json)
 
+class BranchPredictorConfig:
+    def __init__(self, name, bp_model, params=[]) -> None:
+         self.name = name
+         self.bp_model = bp_model
+         self.params = params
+
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
@@ -46,7 +54,23 @@ if __name__ == "__main__":
     args  = parser.parse_args()
 
     cpu_types = ['DerivO3CPU']
-    branch_predictors = ['BiModeBP', 'PerceptronBP']
+    branch_predictors = [
+        # BranchPredictorConfig(name='BiModeBP', bp_model='BiModeBP'),
+        BranchPredictorConfig(name='PerceptronBP_ghs-60_pts-1024', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=60),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1024),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=2048*8),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-2048*8),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(60*1.93+14))
+        ]),
+        BranchPredictorConfig(name='PerceptronBP_ghs-128_pts-1024', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=128),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1024),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=2048*8),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-2048*8),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(128*1.93+14))
+        ])
+    ]
 
     # All benchmarks must have full name hardcoded here
     # Executable file in build_base directory must be renamed in some cases to match the benchmark name (ex. gcc_s)

@@ -27,7 +27,7 @@ all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['BiModeBP', 'LTAGE', 'PerceptronBP']
+branch_predictors = ['BiModeBP', 'LTAGE', 'PerceptronBP_ghs-60_pts-1024', 'PerceptronBP_ghs-128_pts-1024']
 
 
 
@@ -59,15 +59,23 @@ print(df)
 width = min(0.2, 1/len(branch_predictors))
 start_point = np.arange(len(benchmarks))
 
-stat = "accuracy"
-plt.figure(figsize=(12.8, 7.2))
 
-for i, bp in enumerate(branch_predictors):
-    info = df[bp == df['predictor']][stat]
-    plt.bar(start_point + i*width, info, width=width, label=bp)
+def plot_stat(stat, title, ylabel, image_name):
+    plt.figure(figsize=(12.8, 7.2))
 
-plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks, rotation=10, ha='right')
-plt.legend(loc='upper left', prop={'size': 8})
-plt.title("Compare Accuracy")
-plt.ylabel("Accuracy")
-plt.savefig("figures/Compare_accuracy.png")
+    for i, bp in enumerate(branch_predictors):
+        info = df[bp == df['predictor']][stat]
+        plt.bar(start_point + i*width, info, width=width, label=bp)
+
+    plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks, rotation=10, ha='right')
+    plt.legend(loc='upper left', prop={'size': 8})
+    plt.title(title)
+    plt.ylabel(ylabel)
+    plt.savefig("figures/{image_name}".format(image_name=image_name))
+    plt.clf()
+
+plot_stat(stat="accuracy", title="Compare Accuracy", ylabel="Accuracy", image_name='Compare_accuracy.png')
+
+plot_stat(stat="ipc", title="Compare IPC", ylabel="IPC", image_name='Compare_ipc.png')
+
+
