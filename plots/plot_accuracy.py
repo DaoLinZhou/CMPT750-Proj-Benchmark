@@ -23,11 +23,11 @@ def gem5GetStat(filename, stat):
         else:
             return float(0.0)
 
-all_gem5_cpus = ['DefaultO3']
+all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['LTAGE', 'PerceptronBP']
+branch_predictors = ['BiModeBP', 'LTAGE', 'PerceptronBP']
 
 
 
@@ -52,12 +52,15 @@ for bm in benchmarks:
 df = pd.DataFrame(rows, columns=['benchmark','cpu', 'predictor', 'cycles','instructions', 'Ops', 'Ticks','Host', 'predictedNotTakenIncorrect', 'predictedTakenIncorrect', 'condPredicted', 'condIncorrect'])
 df['ipc'] = df['instructions']/df['cycles']
 df['cpi']= 1/df['ipc']
+df['missRate'] = df['condIncorrect'] / df['condPredicted']
+df['accuracy'] = 1 - df['missRate']
 print(df)
 
 width = min(0.2, 1/len(branch_predictors))
-start_point = np.arrange(len(benchmarks))
+start_point = np.arange(len(benchmarks))
 
-stat = "ipc"
+stat = "accuracy"
+plt.figure(figsize=(12.8, 7.2))
 
 for i, bp in enumerate(branch_predictors):
     info = df[bp == df['predictor']][stat]
@@ -65,6 +68,6 @@ for i, bp in enumerate(branch_predictors):
 
 plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks, rotation=10, ha='right')
 plt.legend(loc='upper left', prop={'size': 8})
-plt.title("Compare IPC")
-plt.ylabel("IPC")
-plt.savefig("Compare_ipc.png")
+plt.title("Compare Accuracy")
+plt.ylabel("Accuracy")
+plt.savefig("figures/Compare_accuracy.png")
