@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #SBATCH --cpus-per-task=8
-#SBATCH --time=60:00
+#SBATCH --time=120:00
 #SBATCH --mem=40G
 
 export PROJ_PATH=/data/home/rwa116/Project/CMPT750-Proj

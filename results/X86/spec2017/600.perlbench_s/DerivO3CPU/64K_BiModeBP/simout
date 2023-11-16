@@ -1,14 +1,12 @@
-Global frequency set at 1000000000000 ticks per second
-Redirecting stdout to /data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/X86/spec2017/600.perlbench_s/DerivO3CPU/64K_BiModeBP/simout
-Redirecting stderr to /data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/X86/spec2017/600.perlbench_s/DerivO3CPU/64K_BiModeBP/simerr
 gem5 Simulator System.  http://gem5.org
 gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 version 20.1.0.2
 gem5 compiled Nov 12 2023 22:10:15
-gem5 started Nov 14 2023 03:59:08
-gem5 executing on ARCH-750, pid 4127025
-command line: /data/home/rwa116/Project/CMPT750-Proj/build/X86/gem5.opt -re --outdir=/data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/X86/spec2017/600.perlbench_s/DerivO3CPU/64K_BiModeBP /data/home/rwa116/Project/CMPT750-Proj/configs/example/se.py --cpu-type=DerivO3CPU --caches --l2cache --l1d_size=32kB --l1i_size=32kB --l2_size=512kB --bp-type=BiModeBP '--param=system.cpu[:].branchPred.choicePredictorSize=65536' '--param=system.cpu[:].branchPred.globalPredictorSize=65536' --cmd=/data/home/rwa116/Project/spec/benchspec/CPU/600.perlbench_s/build/build_base_mytest-m64.0000/perlbench_s '--options=-I./lib checkspam.pl 2500 5 25 11 150 1 1 1 1 > checkspam.2500.5.25.11.150.1.1.1.1.out 2>> checkspam.2500.5.25.11.150.1.1.1.1.err' --sys-clock=4GHz --warmup-insts=1000000 --maxinsts=100000000
+gem5 started Nov 16 2023 01:49:03
+gem5 executing on ARCH-750, pid 689968
+command line: /data/home/rwa116/Project/CMPT750-Proj/build/X86/gem5.opt -re --outdir=/data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/X86/spec2017/600.perlbench_s/DerivO3CPU/64K_BiModeBP /data/home/rwa116/Project/CMPT750-Proj/configs/example/se.py --cpu-type=DerivO3CPU --caches --l2cache --l1d_size=32kB --l1i_size=32kB --l2_size=512kB --bp-type=BiModeBP '--param=system.cpu[:].branchPred.globalPredictorSize=65536' '--param=system.cpu[:].branchPred.choicePredictorSize=65536' --cmd=/data/home/rwa116/Project/spec/benchspec/CPU/600.perlbench_s/build/build_base_mytest-m64.0000/perlbench_s '--options=-I./lib checkspam.pl 2500 5 25 11 150 1 1 1 1 > checkspam.2500.5.25.11.150.1.1.1.1.out 2>> checkspam.2500.5.25.11.150.1.1.1.1.err' --sys-clock=4GHz --warmup-insts=1000000 --maxinsts=100000000
 
-info: Standard input is not a terminal, disabling listeners.
+Global frequency set at 1000000000000 ticks per second
 **** REAL SIMULATION ****
+Exiting @ tick 82916573000 because a thread reached the max instruction count

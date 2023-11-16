@@ -34,8 +34,9 @@ preds_8K = ['8K_BiModeBP', '8K_PerceptronBP_ghs-34_pts-240']
 preds_16K = ['16K_BiModeBP', '16K_PerceptronBP_ghs-36_pts-455']
 preds_32K = ['32K_BiModeBP', '32K_PerceptronBP_ghs-59_pts-555']
 preds_64K = ['64K_BiModeBP', '64K_PerceptronBP_ghs-59_pts-1110']
-branch_categories = [preds_4K, preds_8K, preds_16K, preds_32K, preds_64K]
-cat_labels = ['4kB', '8kB', '16kB', '32kB', '64kB']
+preds_128K = ['128K_BiModeBP', '128K_PerceptronBP_ghs-62_pts-2114']
+branch_categories = [preds_4K, preds_8K, preds_16K, preds_32K, preds_64K, preds_128K]
+cat_labels = ['4kB', '8kB', '16kB', '32kB', '64kB', '128kB']
 
 
 
