@@ -8,7 +8,7 @@ if not os.getenv("BENCH_PATH"):
     exit(1)
 
 
-datadir = os.getenv('BENCH_PATH')+'/results/X86/spec2017'
+datadir = os.getenv('BENCH_PATH')+'/results/100M/X86/spec2017'
 
 def gem5GetStat(filename, stat):
     filename = os.path.join(datadir, '', filename, 'stats.txt').replace('\\','/')

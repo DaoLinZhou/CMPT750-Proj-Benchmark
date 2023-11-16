@@ -18,7 +18,7 @@ def worker(bm, cpu, bp, bm_options):
         'microbench_tests',
         os.getenv('PROJ_PATH')+'/build/X86/gem5.opt',
         os.getenv('PROJ_PATH')+'/configs/example/se.py',
-        os.getenv('BENCH_PATH')+'/results/X86/spec2017/{}/{}/{}'.format(bm,cpu,bp.name),
+        os.getenv('BENCH_PATH')+'/results/100M/X86/spec2017/{}/{}/{}'.format(bm,cpu,bp.name),
         '--cpu-type={cpu}'.format(cpu=cpu),
         '--caches',
         '--l2cache',
@@ -32,7 +32,7 @@ def worker(bm, cpu, bp, bm_options):
         '--sys-clock=4GHz',
         '--warmup-insts=1000000',
         '--maxinsts=100000000',
-        timeout = 3600
+        timeout = 7200
         )
 
     run.run()
@@ -69,19 +69,19 @@ if __name__ == "__main__":
         #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=16384),
         #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=16384)
         # }),
-        # BranchPredictorConfig(name='32K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=32768),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=32768)
-        # }),
+        BranchPredictorConfig(name='32K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=32768),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=32768)
+        }),
         BranchPredictorConfig(name='64K_BiModeBP', bp_model='BiModeBP', params={
             '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=65536),
             '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=65536)
+        }),
+        BranchPredictorConfig(name='128K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=131072),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=131072)
         })
         # ,
-        # BranchPredictorConfig(name='128K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=131072),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=131072)
-        # }),
         # BranchPredictorConfig(name='4K_PerceptronBP_ghs-28_pts-146', bp_model='PerceptronBP', params=[
         #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=28),
         #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=146),

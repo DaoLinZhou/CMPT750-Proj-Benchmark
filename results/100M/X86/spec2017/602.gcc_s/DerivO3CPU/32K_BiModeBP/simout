@@ -1,0 +1,15 @@
+Global frequency set at 1000000000000 ticks per second
+Redirecting stdout to /data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/100M/X86/spec2017/602.gcc_s/DerivO3CPU/32K_BiModeBP/simout
+Redirecting stderr to /data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/100M/X86/spec2017/602.gcc_s/DerivO3CPU/32K_BiModeBP/simerr
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 20.1.0.2
+gem5 compiled Nov 12 2023 22:10:15
+gem5 started Nov 16 2023 07:42:43
+gem5 executing on ARCH-750, pid 713377
+command line: /data/home/rwa116/Project/CMPT750-Proj/build/X86/gem5.opt -re --outdir=/data/home/rwa116/Project/CMPT750-Proj-Benchmark/results/100M/X86/spec2017/602.gcc_s/DerivO3CPU/32K_BiModeBP /data/home/rwa116/Project/CMPT750-Proj/configs/example/se.py --cpu-type=DerivO3CPU --caches --l2cache --l1d_size=32kB --l1i_size=32kB --l2_size=512kB --bp-type=BiModeBP '--param=system.cpu[:].branchPred.globalPredictorSize=32768' '--param=system.cpu[:].branchPred.choicePredictorSize=32768' --cmd=/data/home/rwa116/Project/spec/benchspec/CPU/602.gcc_s/build/build_base_mytest-m64.0000/gcc_s '--options=gcc-pp.c -O5 -fipa-pta -o gcc-pp.opts-O5_-fipa-pta.s > gcc-pp.opts-O5_-fipa-pta.out 2>> gcc-pp.opts-O5_-fipa-pta.err' --sys-clock=4GHz --warmup-insts=1000000 --maxinsts=100000000
+
+info: Standard input is not a terminal, disabling listeners.
+**** REAL SIMULATION ****
+Exiting @ tick 75863882500 because a thread reached the max instruction count

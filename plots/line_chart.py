@@ -8,7 +8,7 @@ if not os.getenv("BENCH_PATH"):
     exit(1)
 
 
-datadir = os.getenv('BENCH_PATH')+'/results/X86/spec2017'
+datadir = os.getenv('BENCH_PATH')+'/results/100M/X86/spec2017'
 
 def gem5GetStat(filename, stat):
     filename = os.path.join(datadir, '', filename, 'stats.txt').replace('\\','/')
@@ -25,7 +25,7 @@ def gem5GetStat(filename, stat):
 
 all_gem5_cpus = ['DerivO3CPU']
 
-benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
+benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '641.leela_s']
 
 
 
@@ -98,8 +98,8 @@ def plot_stat(branch_categories, stat, title, ylabel, image_name, *args, **kwarg
         harmonic_means_bi[i] = len(benchmarks) / harmonic_means_bi[i]
         harmonic_means_perc[i] = len(benchmarks) / harmonic_means_perc[i]
 
-    plt.plot(np.linspace(0, 4, len(branch_categories)), harmonic_means_bi, marker='o')
-    plt.plot(np.linspace(0, 4, len(branch_categories)), harmonic_means_perc, marker='*')
+    plt.plot(np.linspace(0, len(branch_categories)-1, len(branch_categories)), harmonic_means_bi, marker='o')
+    plt.plot(np.linspace(0, len(branch_categories)-1, len(branch_categories)), harmonic_means_perc, marker='*')
     plt.xticks(range(len(cat_labels)), cat_labels)
     plt.legend(loc='lower left', prop={'size': 8})
     plt.title(title)
