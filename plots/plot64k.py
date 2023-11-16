@@ -8,7 +8,7 @@ if not os.getenv("BENCH_PATH"):
     exit(1)
 
 
-datadir = os.getenv('BENCH_PATH')+'/results/100M/X86/spec2017'
+datadir = os.getenv('BENCH_PATH')+'/results/10M/X86/spec2017'
 
 def gem5GetStat(filename, stat):
     filename = os.path.join(datadir, '', filename, 'stats.txt').replace('\\','/')
@@ -55,7 +55,7 @@ df['accuracy'] = 1 - df['missRate']
 print(df)
 
 width = min(0.2, 1/len(branch_predictors))
-start_point = np.arange(len(benchmarks))
+start_point = np.arange(len(benchmarks)+1)
 
 
 def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
@@ -64,9 +64,11 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
 
     for i, bp in enumerate(branch_predictors):
         info = df[bp == df['predictor']][stat]
+        harmonic_mean = len(info) / np.sum(1 / info)
+        info = pd.concat([info, pd.Series(harmonic_mean)])
         plt.bar(start_point + i*width, info, width=width, label=bp)
 
-    plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks, rotation=10, ha='right')
+    plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks+['Harmonic Mean'], rotation=10, ha='right')
     plt.legend(loc='lower left', prop={'size': 8})
     plt.title(title)
     if yticks is not None:
