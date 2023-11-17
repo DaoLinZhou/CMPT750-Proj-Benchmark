@@ -8,7 +8,7 @@ if not os.getenv("BENCH_PATH"):
     exit(1)
 
 
-datadir = os.getenv('BENCH_PATH')+'/results/10M/X86/spec2017'
+datadir = os.getenv('BENCH_PATH')+'/results/100M/X86/spec2017'
 
 def gem5GetStat(filename, stat):
     filename = os.path.join(datadir, '', filename, 'stats.txt').replace('\\','/')
@@ -25,18 +25,19 @@ def gem5GetStat(filename, stat):
 
 all_gem5_cpus = ['DerivO3CPU']
 
-benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '641.leela_s']
+benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
 
-
+preds_1K = ['1K_BiModeBP', '1K_PerceptronBP_ghs-12_pts-85']
+preds_2K = ['2K_BiModeBP', '2K_PerceptronBP_ghs-22_pts-93']
 preds_4K = ['4K_BiModeBP', '4K_PerceptronBP_ghs-28_pts-146']
 preds_8K = ['8K_BiModeBP', '8K_PerceptronBP_ghs-34_pts-240']
 preds_16K = ['16K_BiModeBP', '16K_PerceptronBP_ghs-36_pts-455']
 preds_32K = ['32K_BiModeBP', '32K_PerceptronBP_ghs-59_pts-555']
 preds_64K = ['64K_BiModeBP', '64K_PerceptronBP_ghs-59_pts-1110']
 preds_128K = ['128K_BiModeBP', '128K_PerceptronBP_ghs-62_pts-2114']
-branch_categories = [preds_4K, preds_8K, preds_16K, preds_32K, preds_64K, preds_128K]
-cat_labels = ['4kB', '8kB', '16kB', '32kB', '64kB', '128kB']
+branch_categories = [preds_1K, preds_2K, preds_4K, preds_8K, preds_16K, preds_32K, preds_64K, preds_128K]
+cat_labels = ['1kB', '2kB', '4kB', '8kB', '16kB', '32kB', '64kB', '128kB']
 
 
 
@@ -63,6 +64,7 @@ df = pd.DataFrame(rows, columns=['benchmark','cpu', 'predictor', 'cycles','instr
 df['ipc'] = df['instructions']/df['cycles']
 df['cpi']= 1/df['ipc']
 df['missRate'] = df['condIncorrect'] / df['condPredicted']
+df['missPercent'] = df['missRate'] * 100
 df['accuracy'] = 1 - df['missRate']
 print(df)
 
@@ -106,9 +108,10 @@ def plot_stat(branch_categories, stat, title, ylabel, image_name, *args, **kwarg
     if yticks is not None:
         plt.yticks(yticks)
         plt.grid(axis='y', linestyle='--')
+    plt.ylim(0, 6)
     plt.ylabel(ylabel)
     plt.savefig("plots/figures/{image_name}".format(image_name=image_name), bbox_inches='tight')
     plt.clf()
 
 
-plot_stat(branch_categories, stat="missRate", title="Compare Miss Rate (Lower is Better)", ylabel="Percent Mispredicted", image_name='Hardware_budget.png')
+plot_stat(branch_categories, stat="missPercent", title="Compare Miss Rate (Lower is Better)", ylabel="Percent Mispredicted", image_name='Hardware_budget.png')
