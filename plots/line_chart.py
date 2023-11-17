@@ -72,22 +72,11 @@ width = min(0.2, 1/len(branch_categories))
 start_point = np.arange(len(benchmarks))
 
 
-def plot_stat(branch_categories, stat, title, ylabel, image_name, *args, **kwargs):
+def plot_stat(branch_categories, stat, title, xlabel, ylabel, image_name, *args, **kwargs):
     yticks = kwargs.get('yticks', None)
     harmonic_means_bi = [0] * len(branch_categories)
     harmonic_means_perc = [0] * len(branch_categories)
     plt.figure(figsize=(12.8, 7.2))
-
-    # for i, bc in enumerate(branch_categories):
-    #     print("bc = " + str(bc))
-    #     for j, bp in enumerate(bc):
-    #         info = df[bp == df['predictor']][stat]
-    #         if j = 0:
-    #             harmonic_means_bi[i] += 1/info.iloc[0]
-    #         else:
-    #             harmonic_means_perc[i] += 1/info.iloc[0]
-    #     harmonic_means_bi[i] = len(bc)/harmonic_means_bi[i]
-    #     harmonic_means_perc[i] = len(bc)/harmonic_means_perc[i]
 
     for i, bc in enumerate(branch_categories):
         for benchmark in benchmarks:
@@ -100,18 +89,19 @@ def plot_stat(branch_categories, stat, title, ylabel, image_name, *args, **kwarg
         harmonic_means_bi[i] = len(benchmarks) / harmonic_means_bi[i]
         harmonic_means_perc[i] = len(benchmarks) / harmonic_means_perc[i]
 
-    plt.plot(np.linspace(0, len(branch_categories)-1, len(branch_categories)), harmonic_means_bi, marker='o')
-    plt.plot(np.linspace(0, len(branch_categories)-1, len(branch_categories)), harmonic_means_perc, marker='*')
+    plt.plot(np.linspace(0, len(branch_categories)-1, len(branch_categories)), harmonic_means_bi, marker='o', label='BiModeBP')
+    plt.plot(np.linspace(0, len(branch_categories)-1, len(branch_categories)), harmonic_means_perc, marker='*', label='PerceptronBP')
     plt.xticks(range(len(cat_labels)), cat_labels)
-    plt.legend(loc='lower left', prop={'size': 8})
+    plt.legend(loc='lower left', frameon=False, fontsize='large')
     plt.title(title)
     if yticks is not None:
         plt.yticks(yticks)
         plt.grid(axis='y', linestyle='--')
-    plt.ylim(0, 6)
+    plt.ylim(0, 5)
+    plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.savefig("plots/figures/{image_name}".format(image_name=image_name), bbox_inches='tight')
     plt.clf()
 
 
-plot_stat(branch_categories, stat="missPercent", title="Compare Miss Rate (Lower is Better)", ylabel="Percent Mispredicted", image_name='Hardware_budget.png')
+plot_stat(branch_categories, stat="missPercent", title="Misprediction Rate vs. Hardware Budget for BiMode and Perceptron Branch Predictors", xlabel='Hardware Budget (kB)', ylabel="Percent Mispredicted", image_name='Hardware_budget.png')

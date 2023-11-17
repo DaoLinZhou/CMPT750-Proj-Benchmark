@@ -80,8 +80,8 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
 
 plot_stat(stat="accuracy", title="Branch Prediction Accuracy Compared with 64kB Hardware Budget", ylabel="Accuracy (Percent Correctly Predicted)", image_name='64K_Compare_accuracy.png')
 
-plot_stat(stat="missRate", title="Branch Prediction Miss Rate Compared with 64kB Hardware Budget", ylabel="Percent Mispredicted", image_name='64K_Compare_missrate.png', yticks=np.arange(0, 0.13, 0.01))
+plot_stat(stat="missRate", title="Branch Prediction Miss Rate Compared with 64kB Hardware Budget", ylabel="Percent Mispredicted", image_name='64K_Compare_missrate.png', yticks=np.arange(0, 0.11, 0.01))
 
-plot_stat(stat="ipc", title="Branch Prediction IPC Compared with 64kB Hardware Budget", ylabel="IPC", image_name='64K_Compare_ipc.png')
+plot_stat(stat="ipc", title="Branch Prediction IPC Compared with 64kB Hardware Budget", ylabel="IPC", image_name='64K_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
 
 

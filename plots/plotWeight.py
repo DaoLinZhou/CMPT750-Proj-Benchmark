@@ -27,7 +27,11 @@ all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['4K_BiModeBP', 'LTAGE', '4K_PerceptronBP_ghs-28_pts-146']
+branch_predictors = ['64K_PerceptronBP_ghs-59_pts-1110', '64K_PerceptronBP_ghs-59_pts-1110_wgh-32']
+branch_labels = {
+    '64K_PerceptronBP_ghs-59_pts-1110': 'PerceptronBP 8bit Weights',
+    '64K_PerceptronBP_ghs-59_pts-1110_wgh-32': 'PerceptronBP 32bit Weights'
+}
 
 
 rows = []
@@ -66,7 +70,7 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
         info = df[bp == df['predictor']][stat]
         harmonic_mean = len(info) / np.sum(1 / info)
         info = pd.concat([info, pd.Series(harmonic_mean)])
-        plt.bar(start_point + i*width, info, width=width, label=bp)
+        plt.bar(start_point + i*width, info, width=width, label=branch_labels[bp])
 
     plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks+['Harmonic Mean'], rotation=10, ha='right')
     plt.legend(loc='lower left', prop={'size': 8})
@@ -78,10 +82,8 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
     plt.savefig("plots/figures/{image_name}".format(image_name=image_name), bbox_inches='tight')
     plt.clf()
 
-plot_stat(stat="accuracy", title="Branch Prediction Accuracy Compared with 4kB Hardware Budget", ylabel="Accuracy (Percent Correctly Predicted)", image_name='4K_Compare_accuracy.png')
+plot_stat(stat="missRate", title="Branch Prediction Miss Rate vs. Weight Bits", ylabel="Percent Mispredicted", image_name='Weight_Compare_missrate.png', yticks=np.arange(0, 0.14, 0.01))
 
-plot_stat(stat="missRate", title="Branch Prediction Miss Rate Compared with 4kB Hardware Budget", ylabel="Percent Mispredicted", image_name='4K_Compare_missrate.png', yticks=np.arange(0, 0.14, 0.01))
-
-plot_stat(stat="ipc", title="Branch Prediction IPC Compared with 4kB Hardware Budget", ylabel="IPC", image_name='4K_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
+plot_stat(stat="ipc", title="Branch Prediction IPC vs. Weight Bits", ylabel="IPC", image_name='Weight_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
 
 
