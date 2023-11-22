@@ -27,8 +27,9 @@ all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['64K_PerceptronBP_ghs-59_pts-1110', '64K_PerceptronBP_ghs-59_pts-1110_wgh-32']
+branch_predictors = ['64K_PerceptronBP_ghs-59_pts-1110_wgh-4', '64K_PerceptronBP_ghs-59_pts-1110', '64K_PerceptronBP_ghs-59_pts-1110_wgh-32']
 branch_labels = {
+    '64K_PerceptronBP_ghs-59_pts-1110_wgh-4': 'PerceptronBP 4bit Weights',
     '64K_PerceptronBP_ghs-59_pts-1110': 'PerceptronBP 8bit Weights',
     '64K_PerceptronBP_ghs-59_pts-1110_wgh-32': 'PerceptronBP 32bit Weights'
 }
