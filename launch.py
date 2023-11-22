@@ -55,14 +55,18 @@ if __name__ == "__main__":
 
     cpu_types = ['DerivO3CPU']
     branch_predictors = [
-        # BranchPredictorConfig(name='BiModeBP', bp_model='BiModeBP'),
+        BranchPredictorConfig(name='BiModeBP', bp_model='BiModeBP'),
+        BranchPredictorConfig(name='LTAGE', bp_model='LTAGE'),
+        # 1024*14*11 bytes, 154K
         BranchPredictorConfig(name='PerceptronForestBP', bp_model='PerceptronForestBP', params=[
             '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=64),
             '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1024),
             '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=11),
             '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128)
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=14)
         ]),
+        # 128*1024 bytes
         BranchPredictorConfig(name='PerceptronBP_ghs-128_pts-1024', bp_model='PerceptronBP', params=[
             '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=128),
             '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1024),
