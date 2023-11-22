@@ -56,12 +56,12 @@ if __name__ == "__main__":
     cpu_types = ['DerivO3CPU']
     branch_predictors = [
         # BranchPredictorConfig(name='BiModeBP', bp_model='BiModeBP'),
-        BranchPredictorConfig(name='PerceptronBP_ghs-60_pts-1024', bp_model='PerceptronBP', params=[
-            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=60),
+        BranchPredictorConfig(name='PerceptronForestBP', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=64),
             '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1024),
-            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=2048*8),
-            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-2048*8),
-            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(60*1.93+14))
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=11),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128)
         ]),
         BranchPredictorConfig(name='PerceptronBP_ghs-128_pts-1024', bp_model='PerceptronBP', params=[
             '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=128),
@@ -70,6 +70,7 @@ if __name__ == "__main__":
             '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-2048*8),
             '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(128*1.93+14))
         ])
+
     ]
 
     # All benchmarks must have full name hardcoded here

@@ -27,7 +27,7 @@ all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['BiModeBP', 'LTAGE', 'PerceptronBP_ghs-60_pts-1024', 'PerceptronBP_ghs-128_pts-1024']
+branch_predictors = ['BiModeBP', 'LTAGE', 'PerceptronBP_ghs-128_pts-1024', 'PerceptronForestBP']
 
 
 
@@ -77,5 +77,6 @@ def plot_stat(stat, title, ylabel, image_name):
 plot_stat(stat="accuracy", title="Compare Accuracy", ylabel="Accuracy", image_name='Compare_accuracy.png')
 
 plot_stat(stat="ipc", title="Compare IPC", ylabel="IPC", image_name='Compare_ipc.png')
+plot_stat(stat="missRate", title="Compare miss rate", ylabel="Miss Rate", image_name='Compare_miss_rate.png')
 
-
+plot_stat(stat="condPredicted", title="Compare predicted times", ylabel="Predict times", image_name='Compare_predict_num.png')
