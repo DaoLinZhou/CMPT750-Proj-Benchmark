@@ -29,12 +29,12 @@ benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.le
 
 branch_predictors = ['128K_PerceptronForestBP_ghs-14_pts-555_pcr-16', '128K_PerceptronForestBP_ghs-28_pts-555_pcr-8', '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10', '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10-sgh', '128K_PerceptronForestBP_ghs-36_pts-910_pcr-4', '128K_PerceptronForestBP_ghs-36_pts-455_pcr-8']
 branch_labels = {
-    '128K_PerceptronForestBP_ghs-14_pts-555_pcr-16': 'PerceptronBP 4bit Weights',
-    '128K_PerceptronForestBP_ghs-28_pts-555_pcr-8': 'PerceptronBP 8bit Weights',
-    '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10': 'PerceptronBP 32bit Weights',
-    '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10-sgh': 'PerceptronBP 32bit Weights',
-    '128K_PerceptronForestBP_ghs-36_pts-910_pcr-4': 'PerceptronBP 32bit Weights',
-    '128K_PerceptronForestBP_ghs-36_pts-455_pcr-8': 'PerceptronBP 32bit Weights'
+    '128K_PerceptronForestBP_ghs-14_pts-555_pcr-16': '16 Perpceptrons, 14 GH each, 62 GH total, 555 Table Entries',
+    '128K_PerceptronForestBP_ghs-28_pts-555_pcr-8': '8 Perpceptrons, 28 GH each, 124 GH total, 555 Table Entries',
+    '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10': '10 Perpceptrons, 36 GH each, 180 GH total, 364 Table Entries',
+    '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10-sgh': '10 Perpceptrons, 36 GH each, 62 GH total, 364 Table Entries',
+    '128K_PerceptronForestBP_ghs-36_pts-910_pcr-4': '4 Perpceptrons, 36 GH each, 124 GH total, 910 Table Entries',
+    '128K_PerceptronForestBP_ghs-36_pts-455_pcr-8': '8 Perpceptrons, 36 GH each, 124 GH total, 455 Table Entries'
 }
 
 rows = []
@@ -73,7 +73,7 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
         info = df[bp == df['predictor']][stat]
         harmonic_mean = len(info) / np.sum(1 / info)
         info = pd.concat([info, pd.Series(harmonic_mean)])
-        plt.bar(start_point + i*width, info, width=width, label=bp)
+        plt.bar(start_point + i*width, info, width=width, label=branch_labels[bp])
 
     plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks+['Harmonic Mean'], rotation=10, ha='right')
     plt.legend(loc='lower left', prop={'size': 8})
@@ -85,10 +85,8 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
     plt.savefig("plots/figures/{image_name}".format(image_name=image_name), bbox_inches='tight')
     plt.clf()
 
-plot_stat(stat="accuracy", title="Branch Prediction Accuracy Compared with 128kB Hardware Budget", ylabel="Accuracy (Percent Correctly Predicted)", image_name='128K_Compare_accuracy.png')
+plot_stat(stat="missRate", title="Branch Prediction Miss Rate vs. PerceptronForest 128kB Configs", ylabel="Percent Mispredicted", image_name='PF_Compare_missrate.png', yticks=np.arange(0, 0.11, 0.01))
 
-plot_stat(stat="missRate", title="Branch Prediction Miss Rate Compared with 128kB Hardware Budget", ylabel="Percent Mispredicted", image_name='128K_Compare_missrate.png', yticks=np.arange(0, 0.11, 0.01))
-
-plot_stat(stat="ipc", title="Branch Prediction IPC Compared with 128kB Hardware Budget", ylabel="IPC", image_name='128K_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
+plot_stat(stat="ipc", title="Branch Prediction IPC vs. PerceptronForest 128kB Configs", ylabel="IPC", image_name='PF_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
 
 

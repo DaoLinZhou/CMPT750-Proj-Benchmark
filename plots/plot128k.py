@@ -27,8 +27,14 @@ all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['128K_BiModeBP', 'LTAGE', '128K_PerceptronBP_ghs-62_pts-2114', '128K_PerceptronForestBP_ghs-14_pts-555_pcr-16', '128K_PerceptronForestBP_ghs-28_pts-555_pcr-8', '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10', '128K_PerceptronForestBP_ghs-36_pts-364_pcr-10-sgh', '128K_PerceptronForestBP_ghs-36_pts-910_pcr-4', '128K_PerceptronForestBP_ghs-36_pts-455_pcr-8']
-
+branch_predictors = ['128K_BiModeBP', 'LTAGE', '128K_PerceptronBP_ghs-62_pts-2114', '128K_PerceptronForestBP_ghs-36_pts-910_pcr-4', '128K_PerceptronForestBP_ghs-36_pts-455_pcr-8']
+branch_labels = {
+    '128K_BiModeBP': '128K_BiModeBP', 
+    'LTAGE': 'LTAGE', 
+    '128K_PerceptronBP_ghs-62_pts-2114': '128K_PerceptronBP_ghs-62_pts-2114', 
+    '128K_PerceptronForestBP_ghs-36_pts-910_pcr-4': '128K_PerceptronForestBP_ghs-124_pts-910_pcr-4_pgh-36', 
+    '128K_PerceptronForestBP_ghs-36_pts-455_pcr-8': '128K_PerceptronForestBP_ghs-124_pts-455_pcr-8_pgh-36'
+    }
 
 rows = []
 for bm in benchmarks: 
@@ -66,7 +72,7 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
         info = df[bp == df['predictor']][stat]
         harmonic_mean = len(info) / np.sum(1 / info)
         info = pd.concat([info, pd.Series(harmonic_mean)])
-        plt.bar(start_point + i*width, info, width=width, label=bp)
+        plt.bar(start_point + i*width, info, width=width, label=branch_labels[bp])
 
     plt.xticks(start_point+(len(branch_predictors)//2)*width, benchmarks+['Harmonic Mean'], rotation=10, ha='right')
     plt.legend(loc='lower left', prop={'size': 8})
