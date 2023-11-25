@@ -27,11 +27,11 @@ all_gem5_cpus = ['DerivO3CPU']
 
 benchmarks = ['600.perlbench_s', '602.gcc_s', '605.mcf_s', '625.x264_s', '641.leela_s']
 
-branch_predictors = ['64K_PerceptronBP_ghs-59_pts-1110_wgh-4', '64K_PerceptronBP_ghs-59_pts-1110', '64K_PerceptronBP_ghs-59_pts-1110_wgh-32']
+branch_predictors = ['64K_PerceptronBP_ghs-62_pts-2114_wgh-4', '64K_PerceptronBP_ghs-59_pts-1110', '64K_PerceptronBP_ghs-36_pts-455_wgh-32']
 branch_labels = {
-    '64K_PerceptronBP_ghs-59_pts-1110_wgh-4': 'PerceptronBP 4bit Weights',
+    '64K_PerceptronBP_ghs-62_pts-2114_wgh-4': 'PerceptronBP 4bit Weights',
     '64K_PerceptronBP_ghs-59_pts-1110': 'PerceptronBP 8bit Weights',
-    '64K_PerceptronBP_ghs-59_pts-1110_wgh-32': 'PerceptronBP 32bit Weights'
+    '64K_PerceptronBP_ghs-36_pts-455_wgh-32': 'PerceptronBP 32bit Weights'
 }
 
 
@@ -83,8 +83,8 @@ def plot_stat(stat, title, ylabel, image_name, *args, **kwargs):
     plt.savefig("plots/figures/{image_name}".format(image_name=image_name), bbox_inches='tight')
     plt.clf()
 
-plot_stat(stat="missRate", title="Branch Prediction Miss Rate vs. Weight Bits", ylabel="Percent Mispredicted", image_name='Weight_Compare_missrate.png', yticks=np.arange(0, 0.14, 0.01))
+plot_stat(stat="missRate", title="Branch Prediction Miss Rate vs. Weight Bits with 64kB Hardware Budget", ylabel="Percent Mispredicted", image_name='Weight_Compare_missrate.png', yticks=np.arange(0, 0.14, 0.01))
 
-plot_stat(stat="ipc", title="Branch Prediction IPC vs. Weight Bits", ylabel="IPC", image_name='Weight_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
+plot_stat(stat="ipc", title="Branch Prediction IPC vs. Weight Bits with 64kB Hardware Budget", ylabel="IPC", image_name='Weight_Compare_ipc.png', yticks=np.arange(0, 1.7, 0.2))
 
 
