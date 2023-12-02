@@ -56,157 +56,157 @@ if __name__ == "__main__":
 
     cpu_types = ['DerivO3CPU']
     branch_predictors = [
-        # BranchPredictorConfig(name='LTAGE', bp_model='LTAGE'),
-        # BranchPredictorConfig(name='1K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=128),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=128)
-        # }),
-        # BranchPredictorConfig(name='2K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=512),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=512)
-        # }),
-        # BranchPredictorConfig(name='4K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=2048),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=2048)
-        # }),
-        # BranchPredictorConfig(name='8K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=8192),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=8192)
-        # }),
-        # BranchPredictorConfig(name='16K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=16384),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=16384)
-        # }),
-        # BranchPredictorConfig(name='32K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=32768),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=32768)
-        # }),
-        # BranchPredictorConfig(name='64K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=65536),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=65536)
-        # }),
-        # BranchPredictorConfig(name='128K_BiModeBP', bp_model='BiModeBP', params={
-        #     '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=131072),
-        #     '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=131072)
-        # }),
-        # BranchPredictorConfig(name='1K_PerceptronBP_ghs-12_pts-85', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=12),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=85),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 12 + 14))
-        # ]),
-        # BranchPredictorConfig(name='2K_PerceptronBP_ghs-22_pts-93', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=22),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=93),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 22 + 14))
-        # ]),
-        # BranchPredictorConfig(name='4K_PerceptronBP_ghs-28_pts-146', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=28),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=146),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 28 + 14))
-        # ]),
-        # BranchPredictorConfig(name='8K_PerceptronBP_ghs-34_pts-240', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=43),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=240),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 43 + 14))
-        # ]),
-        # BranchPredictorConfig(name='16K_PerceptronBP_ghs-36_pts-455', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=36),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=455),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 36 + 14))
-        # ]),
-        # BranchPredictorConfig(name='32K_PerceptronBP_ghs-59_pts-555', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=59),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=555),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 59 + 14))
-        # ]),
-        # BranchPredictorConfig(name='64K_PerceptronBP_ghs-59_pts-1110', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=59),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1110),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93*59+14))
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronBP_ghs-62_pts-2114', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=2114),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93*62+14))
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-14_pts-555_pcr-16', bp_model='PerceptronForestBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=555),
-        #     '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=16),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
-        #     '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=14)
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-28_pts-555_pcr-8', bp_model='PerceptronForestBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=124),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=555),
-        #     '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=8),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
-        #     '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=28)
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-364_pcr-10', bp_model='PerceptronForestBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=180),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=364),
-        #     '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=10),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
-        #     '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-364_pcr-10-sgh', bp_model='PerceptronForestBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=364),
-        #     '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=10),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
-        #     '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-910_pcr-4', bp_model='PerceptronForestBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=124),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=910),
-        #     '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=4),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
-        #     '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
-        # ]),
-        # BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-455_pcr-8', bp_model='PerceptronForestBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=124),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=455),
-        #     '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=8),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
-        #     '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
-        # ]),
-        # BranchPredictorConfig(name='64K_PerceptronBP_ghs-62_pts-2114_wgh-4', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=2114),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<3)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<3)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(0.97*62+7))
-        # ]),
-        # BranchPredictorConfig(name='64K_PerceptronBP_ghs-36_pts-455_wgh-32', bp_model='PerceptronBP', params=[
-        #     '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=36),
-        #     '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=455),
-        #     '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<31)-1),
-        #     '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<31)),
-        #     '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(7.72*36+56))
-        # ]),
+        BranchPredictorConfig(name='LTAGE', bp_model='LTAGE'),
+        BranchPredictorConfig(name='1K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=128),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=128)
+        }),
+        BranchPredictorConfig(name='2K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=512),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=512)
+        }),
+        BranchPredictorConfig(name='4K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=2048),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=2048)
+        }),
+        BranchPredictorConfig(name='8K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=8192),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=8192)
+        }),
+        BranchPredictorConfig(name='16K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=16384),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=16384)
+        }),
+        BranchPredictorConfig(name='32K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=32768),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=32768)
+        }),
+        BranchPredictorConfig(name='64K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=65536),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=65536)
+        }),
+        BranchPredictorConfig(name='128K_BiModeBP', bp_model='BiModeBP', params={
+            '--param=system.cpu[:].branchPred.choicePredictorSize={choicePredictorSize}'.format(choicePredictorSize=131072),
+            '--param=system.cpu[:].branchPred.globalPredictorSize={globalPredictorSize}'.format(globalPredictorSize=131072)
+        }),
+        BranchPredictorConfig(name='1K_PerceptronBP_ghs-12_pts-85', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=12),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=85),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 12 + 14))
+        ]),
+        BranchPredictorConfig(name='2K_PerceptronBP_ghs-22_pts-93', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=22),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=93),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 22 + 14))
+        ]),
+        BranchPredictorConfig(name='4K_PerceptronBP_ghs-28_pts-146', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=28),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=146),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 28 + 14))
+        ]),
+        BranchPredictorConfig(name='8K_PerceptronBP_ghs-34_pts-240', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=43),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=240),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 43 + 14))
+        ]),
+        BranchPredictorConfig(name='16K_PerceptronBP_ghs-36_pts-455', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=36),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=455),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 36 + 14))
+        ]),
+        BranchPredictorConfig(name='32K_PerceptronBP_ghs-59_pts-555', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=59),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=555),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93 * 59 + 14))
+        ]),
+        BranchPredictorConfig(name='64K_PerceptronBP_ghs-59_pts-1110', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=59),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=1110),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93*59+14))
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronBP_ghs-62_pts-2114', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=2114),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<7)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<7)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(1.93*62+14))
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-14_pts-555_pcr-16', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=555),
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=16),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=14)
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-28_pts-555_pcr-8', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=124),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=555),
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=8),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=28)
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-364_pcr-10', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=180),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=364),
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=10),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-364_pcr-10-sgh', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=364),
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=10),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-910_pcr-4', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=124),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=910),
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=4),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
+        ]),
+        BranchPredictorConfig(name='128K_PerceptronForestBP_ghs-36_pts-455_pcr-8', bp_model='PerceptronForestBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=124),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=455),
+            '--param=system.cpu[:].branchPred.perceptronNum={perceptronNum}'.format(perceptronNum=8),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=128),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-128),
+            '--param=system.cpu[:].branchPred.avgPerceptronLength={avgPerceptronLength}'.format(avgPerceptronLength=36)
+        ]),
+        BranchPredictorConfig(name='64K_PerceptronBP_ghs-62_pts-2114_wgh-4', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=62),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=2114),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<3)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<3)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(0.97*62+7))
+        ]),
+        BranchPredictorConfig(name='64K_PerceptronBP_ghs-36_pts-455_wgh-32', bp_model='PerceptronBP', params=[
+            '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=36),
+            '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=455),
+            '--param=system.cpu[:].branchPred.maxWeight={maxWeight}'.format(maxWeight=(1<<31)-1),
+            '--param=system.cpu[:].branchPred.minWeight={minWeight}'.format(minWeight=-(1<<31)),
+            '--param=system.cpu[:].branchPred.threshold={threshold}'.format(threshold=int(7.72*36+56))
+        ]),
         BranchPredictorConfig(name='4K_PerceptronBP_ghs-34_pts-240_wgh-4', bp_model='PerceptronBP', params=[
             '--param=system.cpu[:].branchPred.globalHistorySize={globalHistorySize}'.format(globalHistorySize=34),
             '--param=system.cpu[:].branchPred.perceptronTableSize={perceptronTableSize}'.format(perceptronTableSize=240),
